@@ -1,5 +1,10 @@
-const permission = { name: "run", command: "uname" } as const;
-const permissionStatus = await Deno.permissions.request(permission);
+const permission: Deno.RunPermissionDescriptor = {
+  name: "run",
+  command: "uname",
+} as const;
+const permissionStatus: Deno.PermissionStatus = await Deno.permissions.request(
+  permission,
+);
 
 if (permissionStatus.state !== "granted") {
   console.log(
@@ -8,7 +13,7 @@ if (permissionStatus.state !== "granted") {
   Deno.exit(1);
 }
 
-const process = Deno.run({
+const process: Deno.Process = Deno.run({
   cmd: ["uname", "-a"],
   stdout: "piped",
   stderr: "piped",
