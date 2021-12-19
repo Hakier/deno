@@ -1,4 +1,4 @@
-const permission = {name: 'run', path: 'uname'} as const;
+const permission = {name: 'run', command: 'uname'} as const;
 const permissionStatus = await Deno.permissions.request(permission);
 
 if (permissionStatus.state !== 'granted') {
