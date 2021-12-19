@@ -1,11 +1,20 @@
-const permission = {name: 'run', command: 'uname'} as const;
+const permission = { name: "run", command: "uname" } as const;
 const permissionStatus = await Deno.permissions.request(permission);
 
-if (permissionStatus.state !== 'granted') {
-  console.log('To use this script you must grant a permission to call uname command');
+if (permissionStatus.state !== "granted") {
+  console.log(
+    "To use this script you must grant a permission to call uname command",
+  );
   Deno.exit(1);
 }
 
-const process = Deno.run({cmd: ['uname', '-a'], stdout: 'piped', stderr: 'piped'});
+const process = Deno.run({
+  cmd: ["uname", "-a"],
+  stdout: "piped",
+  stderr: "piped",
+});
 
-console.log({status: await process.status(), output: new TextDecoder().decode(await process.output()) });
+console.log({
+  status: await process.status(),
+  output: new TextDecoder().decode(await process.output()),
+});
