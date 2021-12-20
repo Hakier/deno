@@ -9,4 +9,4 @@ const options: Deno.ListenOptions = {
   port: +(Deno.args[0] || 8000),
 };
 serve(handler, options);
-console.info(`Server started: ${options.hostname}:${options.port}`)
+console.info(`Server started. You can access it with this URL: http://${options.hostname}:${options.port}`)
